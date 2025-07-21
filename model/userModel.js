@@ -21,9 +21,10 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["recruiter", "candidate"],
-      default: "candidate",
+      enum: ["recruiter", "jobseeker"],
+      default: "jobseeker",
     },
+    passwordChangedAt: String,
   },
   { timeStamps: true }
 );
@@ -37,6 +38,18 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.isValidPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
+};
+
+userSchema.methods.changePasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+    return JWTTimestamp < changedTimestamp;
+  }
+
+  return false;
 };
 
 const User = mongoose.model("User", userSchema);
