@@ -3,15 +3,16 @@ const jwt = require("jsonwebtoken");
 const User = require("./../model/userModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
+const Job = require("../model/jobModel");
 
 exports.validateUser = catchAsync(async (req, res, next) => {
   let token;
 
   if (
-    req.header.authorization ||
-    req.header.authorization.startsWith("Bearer")
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
   ) {
-    token = req.header.authorization.split(" ")[1];
+    token = req.headers.authorization.split(" ")[1];
   }
 
   if (!token) {
@@ -22,7 +23,7 @@ exports.validateUser = catchAsync(async (req, res, next) => {
 
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-  const currentUser = User.findById(decoded.id);
+  const currentUser = await User.findById(decoded.id);
 
   if (!currentUser) {
     return next(
@@ -42,9 +43,30 @@ exports.validateUser = catchAsync(async (req, res, next) => {
 
 exports.restrictTo = (role) => {
   return (req, res, next) => {
+    // console.log(req.user)
     if (req.user.role !== role) {
-      return next(new AppError("You cannot access this", 400));
+      return next(new AppError("You cannot access this", 403));
     }
     next();
   };
 };
+
+exports.checkOwnership = catchAsync(async (req, res, next) => {
+  const job = await Job.findById(req.params.id);
+
+  if (!job) {
+    return next(new AppError("Cannot find job", 401));
+  }
+
+  if (req.user.id !== job.recruiterId.toString()) {
+    return next(
+      new AppError(
+        "You cannot perform this action because you are not the owner of this job",
+        401
+      )
+    );
+  }
+
+  req.job = job;
+  next();
+});

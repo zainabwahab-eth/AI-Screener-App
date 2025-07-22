@@ -4,12 +4,12 @@ const jobSchema = new mongoose.Schema(
   {
     recruiterId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: User,
+      ref: "User",
       required: true,
     },
     title: {
       type: String,
-      required: [true, "Jon must have a title"],
+      required: [true, "job must have a title"],
     },
     description: {
       type: String,
@@ -26,17 +26,23 @@ const jobSchema = new mongoose.Schema(
     experience: {
       type: String,
       enum: ["entry-level", "beginner", "junior", "senior", "associate"],
-      default: junior,
+      default: "junior",
     },
     jobStatus: {
       type: String,
-      enum: ["active", "inacive"],
-      default: active,
+      enum: ["active", "inactive"],
+      default: "active",
+    },
+    locationType: {
+      type: String,
+      enum: ["remote", "on-site", "hybrid"],
+      default: "remote",
     },
     noOfApplication: {
       type: Number,
       default: 0,
     },
+    tags: [],
   },
   { timestamps: true }
 );
