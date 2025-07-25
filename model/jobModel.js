@@ -20,9 +20,7 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: [true, "Job must have role"],
     },
-    company: String,
     location: String,
-    industry: String,
     experience: {
       type: String,
       enum: ["entry-level", "beginner", "junior", "senior", "associate"],

@@ -21,12 +21,27 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["recruiter", "jobseeker"],
-      default: "jobseeker",
+      enum: ["recruiter", "applicant"],
+      default: "applicant",
     },
-    passwordChangedAt: String,
+    company: {
+      name: String,
+      industry: String,
+      website: String,
+      logo: {
+        logoname: String,
+        cloudinary_id: String,
+        url: String,
+      },
+      hasCompletedOnboarding: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    passwordChangedAt: Date,
   },
-  { timeStamps: true }
+
+  { timestamps: true }
 );
 
 userSchema.pre("save", async function (next) {

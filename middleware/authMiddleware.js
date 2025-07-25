@@ -4,6 +4,7 @@ const User = require("./../model/userModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 const Job = require("../model/jobModel");
+const Application = require("./../model/applicationModel");
 
 exports.validateUser = catchAsync(async (req, res, next) => {
   let token;
@@ -41,17 +42,21 @@ exports.validateUser = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.restrictTo = (role) => {
+exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    // console.log(req.user)
-    if (req.user.role !== role) {
-      return next(new AppError("You cannot access this", 403));
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError(
+          "You do not have the permission to perform this action",
+          403
+        )
+      );
     }
     next();
   };
 };
 
-exports.checkOwnership = catchAsync(async (req, res, next) => {
+exports.checkRecruiter = catchAsync(async (req, res, next) => {
   const job = await Job.findById(req.params.id);
 
   if (!job) {
@@ -68,5 +73,23 @@ exports.checkOwnership = catchAsync(async (req, res, next) => {
   }
 
   req.job = job;
+  next();
+});
+
+exports.checkApplicant = catchAsync(async (req, res, next) => {
+  const application = await Application.findById(req.params.applicationId);
+  if (!application) {
+    return next(new AppError("Cannot find application", 401));
+  }
+
+  if (req.user.id !== application.applicantId.toString()) {
+    return next(
+      new AppError(
+        "You cannot perform this action because you are not the owner of this Application",
+        401
+      )
+    );
+  }
+  req.application = application;
   next();
 });
