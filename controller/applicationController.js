@@ -57,7 +57,6 @@ exports.createApplication = catchAsync(async (req, res, next) => {
   }
 
   const file = req.file;
-  console.log(file);
   if (!file) {
     return next(new AppError("You have to upload your resume", 400));
   }
@@ -96,6 +95,10 @@ exports.createApplication = catchAsync(async (req, res, next) => {
     },
     extractedText,
   });
+
+  const job = req.job;
+  job.noOfApplications++;
+  await job.save();
 
   res.status(201).json({
     status: "success",

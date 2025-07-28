@@ -17,4 +17,11 @@ router.post(
   userController.onboardRecruiter
 );
 
+router.post(
+  "/applicant/onboard",
+  authMiddleware.restrictTo("applicant"),
+  userController.uploadProfilePics,
+  userController.onboardApplicant
+);
+
 module.exports = router;

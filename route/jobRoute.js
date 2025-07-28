@@ -6,18 +6,41 @@ const router = express.Router();
 
 //Apllicant
 router.route("/").get(jobController.getAllJobs);
-router.route("/:id").get(jobController.getJob);
 
-//Recruiter
+router.get(
+  "/myFavourite",
+  authMiddleware.validateUser,
+  authMiddleware.restrictTo("applicant"),
+  jobController.getMyFavoriteJobs
+);
+
+router.route("/:jobId").get(jobController.getJob);
+
 router.use(authMiddleware.validateUser);
 
+//Applicant
+// router.get(
+//   "/my-Favourite",
+//   authMiddleware.restrictTo("applicant"),
+//   jobController.getFavouriteJobs
+// );
+
+router
+  .route("/favourite/:jobId")
+  .post(
+    authMiddleware.restrictTo("applicant"),
+    authMiddleware.checkJob,
+    jobController.toggleFavourite
+  );
+
+//Recruiter
 router
   .route("/recruiter/jobs")
   .get(authMiddleware.restrictTo("recruiter"), jobController.getMyJobs)
   .post(authMiddleware.restrictTo("recruiter"), jobController.createJob);
 
 router
-  .route("/recruiter/job/:id/status")
+  .route("/recruiter/job/:jobId/status")
   .patch(
     authMiddleware.restrictTo("recruiter"),
     authMiddleware.checkRecruiter,
@@ -25,7 +48,7 @@ router
   );
 
 router
-  .route("/recruiter/job/:id")
+  .route("/recruiter/job/:jobId")
   .patch(
     authMiddleware.restrictTo("recruiter"),
     authMiddleware.checkRecruiter,

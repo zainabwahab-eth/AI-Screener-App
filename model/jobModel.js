@@ -14,7 +14,11 @@ const jobSchema = new mongoose.Schema(
     description: {
       type: String,
       trim: true,
-      required: [true, "Job must habe a description"],
+      required: [true, "Job must have a description"],
+    },
+    requirements: {
+      type: String,
+      required: [true, "Job must have requirements"],
     },
     role: {
       type: String,
@@ -23,27 +27,46 @@ const jobSchema = new mongoose.Schema(
     location: String,
     experience: {
       type: String,
-      enum: ["entry-level", "beginner", "junior", "senior", "associate"],
-      default: "junior",
+      enum: ["entry-level", "beginner", "mid-level", "senior", "associate"],
+      default: "mid-level",
     },
     jobStatus: {
       type: String,
       enum: ["active", "inactive"],
       default: "active",
     },
+    minSalary: {
+      type: Number,
+    },
+    maxSalary: {
+      type: Number,
+    },
     locationType: {
       type: String,
       enum: ["remote", "on-site", "hybrid"],
       default: "remote",
     },
-    noOfApplication: {
+    noOfApplications: {
       type: Number,
       default: 0,
     },
-    tags: [],
+    tags: [String],
   },
   { timestamps: true }
 );
+
+jobSchema.pre(/^find/, function (next) {
+  this.find({ jobStatus: { $ne: "inactive" } });
+  next();
+});
+
+jobSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "recruiterId",
+    select: "name company.name company.logo company.website",
+  });
+  next();
+});
 
 const Job = mongoose.model("Job", jobSchema);
 

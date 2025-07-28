@@ -57,7 +57,7 @@ exports.restrictTo = (...roles) => {
 };
 
 exports.checkRecruiter = catchAsync(async (req, res, next) => {
-  const job = await Job.findById(req.params.id);
+  const job = await Job.findById(req.params.jobId);
 
   if (!job) {
     return next(new AppError("Cannot find job", 401));
@@ -91,5 +91,15 @@ exports.checkApplicant = catchAsync(async (req, res, next) => {
     );
   }
   req.application = application;
+  next();
+});
+
+exports.checkJob = catchAsync(async (req, res, next) => {
+  const job = await Job.findById(req.params.jobId);
+  if (!job) {
+    return next(new AppError("This job does not exist", 401));
+  }
+
+  req.job = job;
   next();
 });

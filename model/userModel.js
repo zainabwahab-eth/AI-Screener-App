@@ -38,6 +38,26 @@ const userSchema = new mongoose.Schema(
         default: false,
       },
     },
+    applicant: {
+      bio: String,
+      interest: [String],
+      website: String,
+      profilePics: {
+        picsname: String,
+        cloudinary_id: String,
+        url: String,
+      },
+      hasCompletedOnboarding: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    favoriteJobs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Job",
+      },
+    ],
     passwordChangedAt: Date,
   },
 

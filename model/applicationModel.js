@@ -25,6 +25,7 @@ const applicationSchema = mongoose.Schema({
   extractedText: String,
   aiScore: Number,
   aiFeedback: String,
+  lastScreenedAt: Date,
 });
 
 const Application = mongoose.model("Application", applicationSchema);
