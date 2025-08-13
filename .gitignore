@@ -2,4 +2,8 @@ config.env
 node_modules
 seed.js
 data/
+public/
+.parcel-cache/
 
+
+.parcel-cache/

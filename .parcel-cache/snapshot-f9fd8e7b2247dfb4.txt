@@ -29,7 +29,7 @@
 70C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pug-linker133984816003341534 1
 104C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\client\dist\lib\commands\ZLEXCOUNT.js133982388666151518 0
 65C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pause133984816002007616 1
-57C:\Users\USER\OneDrive\Desktop\AI-Screener-app\.gitignore133975955016637117 0
+57C:\Users\USER\OneDrive\Desktop\AI-Screener-app\.gitignore133995799019380044 0
 91C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\caniuse-lite\data\regions\DO.js133985759048330204 0
 86C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\validator\lib\isIPRange.js133975208588855164 0
 99C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\node-cron\dist\esm\task-registry.js.map133982367009536655 0
@@ -92,7 +92,7 @@
 105C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\mongodb\src\cmap\command_monitoring_events.ts133973229436438285 0
 64C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\bson133984815987869539 1
 101C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\caniuse-lite\data\features\import-maps.js133985759050648763 0
-71C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\css\style.css133995596979530114 0
+71C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\css\style.css133995723174858542 0
 56C:\Users\USER\OneDrive\Desktop\AI-Screener-app\.parcelrc133985933631624201 0
 113C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@swc\helpers\src\_object_without_properties_loose.mjs133985759051342774 0
 124C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pdf-parse\lib\pdf.js\v1.10.88\web\locale\pt-PT\viewer.properties133977481815683147 0
@@ -117,7 +117,7 @@
 101C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\mongoose\lib\types\array\methods\index.js133973229432716696 0
 96C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@parcel\diagnostic\lib\diagnostic.js133985759065723046 0
 98C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\features\array\virtual\push.js133977621949605627 0
-76C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\js\handleFilter.js133995458143007066 0
+76C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\js\handleFilter.js133995729130103320 0
 88C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\stable\array\fill.js133977621919258304 0
 84C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\side-channel-map\.github133984816088826228 1
 121C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pdf-parse\lib\pdf.js\v1.9.426\web\locale\ms\viewer.properties133977481832461263 0
@@ -221,7 +221,7 @@
 87C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@xmldom\xmldom\CHANGELOG.md133977481324847023 0
 97C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\modules\es.typed-array.map.js133977621909190545 0
 79C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\promise\src\core.js133982493298471296 0
-53C:\Users\USER\OneDrive\Desktop\AI-Screener-app\public133995646220892487 1
+53C:\Users\USER\OneDrive\Desktop\AI-Screener-app\public133995782555554580 1
 89C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\type-fest\source\entries.d.ts133985759031529660 0
 119C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\caniuse-lite\data\features\mdn-text-decoration-shorthand.js133985759053461079 0
 85C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\underscore\cjs\initial.js133977481323224973 0
@@ -233,7 +233,7 @@
 82C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\lodash\_mapCacheSet.js133977621889095629 0
 97C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\resolve\test\node_path\y\ccc\index.js133982493298761687 0
 104C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\mongoose\lib\helpers\query\sanitizeFilter.js133973229435153214 0
-69C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\js\index.js133995600156279670 0
+69C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\js\index.js133995782498683236 0
 96C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\features\weak-set\add-all.js133977621886261907 0
 80C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\nullthrows\README.md133985759030480710 0
 111C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\search\dist\lib\commands\CURSOR_DEL.d.ts.map133982388662126880 0
@@ -276,7 +276,7 @@
 91C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\es\error\constructor.js133977621894873184 0
 104C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\client\dist\lib\commands\LCS_IDX.d.ts133982388678645058 0
 81C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\lodash\fp\assignIn.js133977621891053158 0
-66C:\Users\USER\OneDrive\Desktop\AI-Screener-app\public\index.js.map133995646220760319 0
+66C:\Users\USER\OneDrive\Desktop\AI-Screener-app\public\index.js.map133995782555479546 0
 69C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\validator133984816009243670 1
 99C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\simple-update-notifier\build\index.d.ts133975919405420652 0
 93C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\features\reflect\apply.js133977621887789905 0
@@ -284,7 +284,7 @@
 101C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\json\dist\lib\commands\MSET.js.map133982388663644490 0
 88C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\web\dom-exception.js133977621899728453 0
 88C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\fs-extra\lib\ensure\index.js133977635979843774 0
-54C:\Users\USER\OneDrive\Desktop\AI-Screener-app\seed.js133995665197080931 0
+54C:\Users\USER\OneDrive\Desktop\AI-Screener-app\seed.js133995666196659749 0
 115C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\mongoose\lib\helpers\projection\isDefiningProjection.js133973229433475193 0
 91C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\underscore\amd\_toBufferView.js133977481319928509 0
 71C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\on-finished133984816000275770 1
@@ -331,7 +331,7 @@
 103C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\node-cron\dist\esm\time\localized-time.d.ts133982367009787588 0
 78C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\lodash\fp\array.js133977621890909403 0
 100C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\features\symbol\to-string-tag.js133977621971176089 0
-68C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\js\auth.js133995110865322077 0
+68C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\js\auth.js133995766876288247 0
 105C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\caniuse-lite\data\features\x-doc-messaging.js133985759059552401 0
 108C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\client\dist\lib\commands\FUNCTION_KILL.js133982388662625591 0
 103C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pdf-parse\lib\pdf.js\v1.9.426\web\locale\da133984816317473829 1
@@ -346,7 +346,7 @@
 101C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\caniuse-lite\data\features\text-stroke.js133985759056529397 0
 95C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\full\object\iterate-keys.js133977621939532968 0
 92C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\features\string\match.js133977621944691034 0
-73C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\views\applications.pug133991787799559292 0
+73C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\views\applications.pug133995694636986409 0
 84C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\underscore\amd\_setup.js133977481319670854 0
 90C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@parcel\core\src\buildCache.js133985759066931876 0
 86C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\underscore\cjs\defaults.js133977481320943792 0
@@ -399,7 +399,7 @@
 92C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\underscore\modules\propertyOf.js133977481326505883 0
 101C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\stable\url-search-params\index.js133977621936189593 0
 99C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\stable\typed-array\to-sorted.js133977621970355380 0
-66C:\Users\USER\OneDrive\Desktop\AI-Screener-app\utils\logoUpload.js133979124352765453 0
+66C:\Users\USER\OneDrive\Desktop\AI-Screener-app\utils\logoUpload.js133995775408272627 0
 77C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\oauth\lib\sha1.js133977240905018857 0
 100C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\client\dist\lib\commands\VINFO.js133982388665572000 0
 84C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@mischnic\json-sourcemap133985765423505141 1
@@ -416,7 +416,7 @@
 96C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@parcel\transformer-babel\lib\jsx.js133985759052242925 0
 85C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\mammoth\lib\docx\files.js133977481326542373 0
 88C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\passport-oauth2\package.json133977240909227805 0
-69C:\Users\USER\OneDrive\Desktop\AI-Screener-app\utils\optimizeImage.js133991533181951099 0
+69C:\Users\USER\OneDrive\Desktop\AI-Screener-app\utils\optimizeImage.js133995719261979418 0
 57C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client133986245859055733 1
 80C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\type-is\package.json133973215880578635 0
 119C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\node-cron\dist\cjs\pattern\validation\pattern-validation.js133982367008781141 0
@@ -488,7 +488,7 @@
 83C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\lodash\fp\spreadFrom.js133977621904732124 0
 103C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\mongodb\lib\sdam\server_selection_events.js133973229431523112 0
 95C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@swc\helpers\esm\_overload_yield.js133985759040230386 0
-72C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\js\favorite.js133995465084372236 0
+72C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\js\favorite.js133995701763889750 0
 108C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\mongodb\lib\cursor\list_search_indexes_cursor.js133973229431034387 0
 106C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@swc\helpers\cjs\_class_private_field_init.cjs133985759032714996 0
 77C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\validator\LICENSE133975208587733306 0
@@ -498,7 +498,7 @@
 103C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\client\dist\lib\commands\XADD.js.map133982388674542194 0
 108C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\bloom\dist\lib\commands\t-digest\index.js133982388668971621 0
 111C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\caniuse-lite\data\features\subresource-integrity.js133985759056179487 0
-70C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\views\favourite.pug133995465758941584 0
+70C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\views\favourite.pug133995709200009363 0
 75C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\is-regex\.nycrc133982493297598824 0
 87C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\lodash\isArrayLikeObject.js133977621896780233 0
 102C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\modules\esnext.set.intersection.js133977621915705795 0
@@ -522,7 +522,7 @@
 79C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\mongodb\src\beta.ts133973229436199337 0
 106C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\client\dist\lib\commands\COMMAND.js.map133982388667877088 0
 98C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\modules\es.string.ends-with.js133977621907266365 0
-71C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\views\jobdetails.pug133995648478667001 0
+71C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\views\jobdetails.pug133995711548399449 0
 127C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pdf-parse\lib\pdf.js\v1.9.426\web\images\toolbarButton-openFile.png133977481827567833 0
 83C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pdf-parse\.editorconfig133977481789852317 0
 95C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\stable\instance\includes.js133977621932044375 0
@@ -549,11 +549,11 @@
 89C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\promise\src\es6-extensions.js133982493298519796 0
 92C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\full\instance\unshift.js133977621980374416 0
 99C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\stable\string\is-well-formed.js133977621939065063 0
-69C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\views\overview.pug133995102672891790 0
+69C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\views\overview.pug133995711156195272 0
 67C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@xmldom133984816069682113 1
 80C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\lodash\_arraySome.js133977621879092994 0
 79C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\media-typer\LICENSE133973215880722386 0
-68C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\views\_footer.pug133982473449254926 0
+68C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\views\_footer.pug133995787044447171 0
 102C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@parcel\transformer-babel\lib\constants.js133985759052184271 0
 121C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pdf-parse\lib\pdf.js\v1.9.426\web\locale\fa\viewer.properties133977481830943509 0
 103C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\actual\object\prevent-extensions.js133977621949063218 0
@@ -619,7 +619,7 @@
 92C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\validator\es\lib\isByteLength.js133975208588299573 0
 121C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pdf-parse\lib\pdf.js\v1.9.426\web\locale\vi\viewer.properties133977481833999912 0
 94C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\stable\typed-array\fill.js133977621919325096 0
-78C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\js\onboardingForm.js133995457461657571 0
+78C:\Users\USER\OneDrive\Desktop\AI-Screener-app\src\client\js\onboardingForm.js133995776840965643 0
 80C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\side-channel\LICENSE133973215880736582 0
 85C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\validator\lib\isBase32.js133975208588189571 0
 101C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\mongoose\lib\helpers\isSimpleValidator.js133973229433914248 0
@@ -783,7 +783,7 @@
 86C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\lodash\fp\sortedIndexOf.js133977621904350291 0
 121C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pdf-parse\lib\pdf.js\v1.9.426\web\locale\te\viewer.properties133977481833729950 0
 113C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\bloom\dist\lib\commands\bloom\helpers.d.ts.map133982388669959635 0
-62C:\Users\USER\OneDrive\Desktop\AI-Screener-app\public\index.js133995646220621132 0
+62C:\Users\USER\OneDrive\Desktop\AI-Screener-app\public\index.js133995782554966355 0
 87C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\es\instance\flat.js133977621923183407 0
 86C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\underscore\modules\some.js133977481327103307 0
 85C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pako\lib\utils\strings.js133977481313605511 0
@@ -4577,7 +4577,7 @@
 78C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\client\dist133984816172165485 1
 78C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\term-size\index.js133985759030719787 0
 95C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-js\es\typed-array\to-string.js133977621971458595 0
-76C:\Users\USER\OneDrive\Desktop\AI-Screener-app\controller\viewsController.js133991786467835937 0
+76C:\Users\USER\OneDrive\Desktop\AI-Screener-app\controller\viewsController.js133995719997902999 0
 85C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\core-util-is\package.json133977481310455934 0
 100C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@parcel\source-map\parcel_sourcemap_wasm133985765469799127 1
 106C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\caniuse-lite\data\features\wasm-multi-value.js133985759058997425 0
@@ -17060,5 +17060,5 @@
 74C:\Users\USER\OneDrive\Desktop\AI-Screener-app\controller\errController.js133975869605068297 0
 81C:\Users\USER\OneDrive\Desktop\AI-Screener-app\controller\expirationController.js133982409235209750 0
 74C:\Users\USER\OneDrive\Desktop\AI-Screener-app\controller\jobController.js133994286937029564 0
-75C:\Users\USER\OneDrive\Desktop\AI-Screener-app\controller\userController.js133987339275671009 0
-67C:\Users\USER\OneDrive\Desktop\AI-Screener-app\config\cloudinary.js133995635510225948 0
+75C:\Users\USER\OneDrive\Desktop\AI-Screener-app\controller\userController.js133995776244549549 0
+67C:\Users\USER\OneDrive\Desktop\AI-Screener-app\config\cloudinary.js133995783397298807 0
