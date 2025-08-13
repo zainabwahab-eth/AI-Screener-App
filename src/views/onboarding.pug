@@ -1,0 +1,48 @@
+extends authbase
+
+block authcontent
+
+    .onboard-container
+      h1.auth-title.onboard-title Applicant Onboarding
+      p.auth-subtitle.onboard-subtitle Let get details about you 
+      
+      form.onboarding-form
+        .form-group
+            label Profile Pic
+            .upload-div
+                input(class='profilePicInput', type="file", accept="image/*", id="profilePics")
+                .image-box
+                .upload-area
+                    .upload-text Click here to upload
+                    .upload-icon
+                        img(src='/img/general/import.svg' alt='import icon')
+                    .file-uploaded
+                        img.check-icon(src='/img/general/done.svg' alt='image uploaded icon')
+                        span Profile picture uploaded
+                    .file-uploaded-error
+                        img.check-icon(src='/img/general/warning.svg' alt='image uploaded icon')
+                        span Profile pics must be pug, jpg, jpeg and not more than 2mb 
+                    //- .error-message#profilePicsErrorMessage.hidden
+    
+        .form-group
+            label.form-label(for='bio') Enter Bio
+            textarea(name="bio", placeholder='Enter bio', id="bio")
+        
+
+        .form-group
+            label.form-label(for='websiteInput') Website
+            .input-with-icon
+                .link-icon
+                    img(src='/img/general/link.svg' alt='link icon')
+                input(type="text", name="website", placeholder="website link", id="websiteInput")
+          
+        .form-group
+            label Interest
+            .interest-container
+                input.interest-input(type="text", placeholder="Type an interest and press Enter", id="interestInput")
+                .tag-container
+            .interest-hint Press Enter to add, click × to remove (Max 6)
+        
+        .button-row
+          a.btn.btn-secondary(type="button", href="/") Skip
+          button.btn.btn-primary#submitBtn(type="submit", disabled) Done

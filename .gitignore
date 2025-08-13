@@ -1,3 +1,5 @@
 config.env
 node_modules
+seed.js
+data/
 

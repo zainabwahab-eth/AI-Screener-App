@@ -1,0 +1,62 @@
+extends base
+
+block content
+  .container
+    .jobs-page
+      // Filter Sidebar
+      include _filter
+
+      // Main Content
+      .main-content
+        // Hero Section
+        section.hero-section
+          .hero-section__content
+            h1.hero-section__title Your Next Career Move Starts Here
+            p.hero-section__subtitle Explore tailored job opportunities, apply with ease, and let our AI help you stand out to recruiters. Your dream role is just a few clicks away.
+          .hero-section__image
+              img(src='img/general/hero-image.svg' alt=`Hero Image`)
+
+        //- // Filter Toggle for Mobile
+        //- button.filter-toggle(id='filterToggle' style='display: none;')
+        //-   span 📋
+        //-   | Filters
+
+        // Jobs Header
+
+        .jobs-header
+          .jobs-count Showing #{jobs ? jobs.length : 24} Jobs
+          .sort-dropdown
+            span 📊
+            | Sortby
+        
+        // Jobs Grid
+        .jobs-grid
+          each job in jobs
+            - const favoriteJob = user?.favoriteJobs?.includes(job._id)
+            .job-card.animate-fade-in(data-jobid=`${job._id}` data-favorite=`${favoriteJob}`)
+              .job-card__header
+                .job-card__left
+                  .job-card__logo
+                    if job.recruiterId.company.logo 
+                      img.job-card__logo(src=`${job.recruiterId.company.logo.url}` alt=`${job.recruiterId.company.name} logo`)
+                    else 
+                      img.job-card__logo.default-image(src='img/company/defaultcompany.svg' alt=`Company logo`)
+                  .job-card__info
+                    a.job-card__title(href=`/job/${job._id}`)= `${job.title}`
+                      .job-card__meta
+                        span= `• ${job.recruiterId.company.name}`
+                        span= `• ${job.location}`
+                        span= `• ${job.locationType}`
+                        span.job-card__salary= `• ${job.minSalary} - ${job.maxSalary}`
+                  - const favImage = user?.favoriteJobs?.includes(job._id) ? src='/img/general/favorite-active.svg' : src='/img/general/favorite-default.svg'
+
+                  button.job-card__favorite(aria-label='Add to favorites') 
+                    img.fav-image(src=`${favImage}`)
+
+              p.job-card__description= `${job.description}`
+              - const deadline = new Date(job.expiringDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+              .job-card__footer
+                .job-card__deadline
+                  span= `• Deadline: ${deadline}`
+                .job-card__posted
+                  span= formatJobDate(job.createdAt)

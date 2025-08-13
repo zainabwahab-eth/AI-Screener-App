@@ -1,0 +1,36 @@
+extends Base
+
+block content
+    .container
+      .applications-page
+        .applications-header
+          h1.applications-title My Applications (#{applications ? applications.length : 24})
+        
+        .applications-table
+          table
+            thead
+              tr
+                th Job
+                th Date Applied
+                th Status
+                th Action
+            tbody
+              each application in applications || []
+                tr
+                  td
+                    .application-job
+                      if application.jobId.recruiterId.company.logo 
+                        img.application-job__logo(src=`${application.jobId.recruiterId.company.logo.url}` alt=`${application.jobId.recruiterId.company.name} logo`)
+                      else 
+                        img.application-job__logo.default-image(src='img/company/defaultcompany.svg' alt=`Company logo`)
+                      .application-job__info
+                        .application-job__title= application.jobId.title || 'Junior Backend Developer'
+                        .application-job__company= application.jobId.recruiterId.company.name || 'CompanyName'
+                        .application-job__location= application.jobId.location || 'Location'
+                  td= `${new Date(application.submittedAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}`
+                  td
+                    span.application-status(class=`application-status--${application.jobId.status || 'active'}`)= application.jobId.status || 'Active'
+                  td
+                    a.view-job-link(href=`/job/${application.jobId._id}`) View Job
+            
+            

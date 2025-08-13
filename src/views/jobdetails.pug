@@ -1,0 +1,138 @@
+extends Base
+
+block content
+  .container
+  - const favoriteJob = user?.favoriteJobs?.includes(job._id)
+    .job-detail(data-jobid=`${job._id}` data-favorite=`${favoriteJob}`)
+      // Main Content
+      .job-detail__main
+        .job-detail__header
+          .job-detail__info
+            .job-detail__top 
+              if job.recruiterId.company.logo 
+                  img.job-detail__logo(src=`${job.recruiterId.company.logo.url}` alt=`${job.recruiterId.company.name} logo`)
+              else 
+                  img.job-detail__logo.default-image(src='img/company/defaultcompany.svg' alt=`Company logo`)
+              .job-detail__info 
+                h1.job-detail__title= job.title
+                .job-detail__meta
+                  span= `• ${job.recruiterId.company.name}`
+                  span= `• ${job.location}`
+                  span= `• ${job.locationType}`
+                  span.job-detail__salary= `• ${job.minSalary} - ${job.maxSalary}`
+          
+          .job-detail__actions
+            - const favImage = user?.favoriteJobs?.includes(job._id) ? src='/img/general/favorite-active.svg' : src='/img/general/favorite-default.svg'
+              button.job-detail__favorite(aria-label='Add to favorites' type='button') 
+                img.detail-fav-image(src=`${favImage}`)
+              if user
+                button.btn.btn-primary.job-apply-btn(data-applied=`${applied}` disabled=applied) #{applied ? 'Applied' : 'Apply'}
+              else 
+                a.btn.btn-primary.job-apply-btn(href='/login') Login to apply
+        
+        .job-detail__content
+          .job-detail__section
+            h2.job-detail__section-title Job Description
+            p.job-detail__description= job.description
+          
+          .job-detail__section
+            h2.job-detail__section-title Responsibilities
+            ul.job-detail__responsibilities
+              each requirement in job.requirements.split('\n')
+                li= requirement
+
+          .job-detail__section 
+            ul.job-detail__tags 
+              each tag in job.tags 
+                li.job-detail__tag= tag
+      
+      // Sidebar
+      .job-detail__sidebar
+        .job-sidebar-card
+          h3.job-sidebar-card__title Job Details
+          
+          .job-detail-item
+            .job-detail-item__icon
+              img(src='/img/general/award.svg' alt='role-icon')
+            .job-detail-item__content
+              .job-detail-item__label Role
+              .job-detail-item__value= job.role
+          
+          .job-detail-item
+            .job-detail-item__icon 
+              img(src='/img/general/briefcase.svg' alt='experience-icon')
+            .job-detail-item__content
+              .job-detail-item__label Experience
+              .job-detail-item__value= job.experience
+          
+          .job-detail-item
+            .job-detail-item__icon
+              img(src='/img/general/link-bold.svg' alt='website-icon')
+            .job-detail-item__content
+              .job-detail-item__label Company Website
+              .job-detail-item__value= job.recruiterId.company.website
+
+          .job-detail-item
+            .job-detail-item__icon
+              img(src='/img/general/created.svg' alt='posted-icon')
+            .job-detail-item__content
+              .job-detail-item__label Job Posted
+              .job-detail-item__value= formatJobDate(job.createdAt)
+          
+          .job-detail-item
+            .job-detail-item__icon
+              img(src='/img/general/expire.svg' alt='expire-icon')
+            .job-detail-item__content
+              .job-detail-item__label Job Expire
+              .job-detail-item__value=  new Date(job.expiringDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+        if applied
+          .job-sidebar-card
+            h3.job-sidebar-card__title Application Details
+            
+            .job-detail-item
+              .job-detail-item__icon
+                img(src='/img/general/award.svg' alt='role-icon')
+              .job-detail-item__content
+                .job-detail-item__label Resume
+                .job-detail-item__value= application.resume.filename
+                .job-detail-item__value
+                  a.btn.btn-secondary(href=`${application.resume.url}` target='_blank') preview Resume
+        //- include _previewModal
+
+  //Modal
+  .modal.hidden(data-jobid=`${job._id}`)
+    button.close-btn &times;
+    
+    .overlay-header
+      h2.overlay-title Apply for Job
+    
+    .resume-upload-section
+      label.upload-label Upload your resume
+      
+      .resume-upload-area#uploadArea
+        .upload-prompt
+          svg.resume.upload-icon(fill="currentColor" viewBox="0 0 24 24")
+            path(d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z")
+          .upload-text Click here to upload
+          .upload-subtext Only pdf and docx is accepted. Max file size 5 MB. 
+        
+        .upload-success.hidden
+          svg.success-icon(fill="currentColor" viewBox="0 0 24 24")
+            path(d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z")
+          .resume.upload-text File uploaded successfully!
+          .upload-subtext Click to upload a different file
+      
+      .error-message#errorMessage.hidden
+      
+      .file-info#fileInfo.hiddden
+        .file-details
+          div
+            .file-name#fileName
+            .file-size#fileSize
+          button.remove-file Remove
+    
+    button.submit-btn#submitBtn(disabled) Submit
+    
+    input.file-input(type="file" accept=".pdf,.docx" id='resume' name='resume')
+
+  .overlay.hidden

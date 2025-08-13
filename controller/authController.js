@@ -9,23 +9,50 @@ const signToken = (id) => {
   });
 };
 
-exports.signup = catchAsync(async (req, res, next) => {
-  const newUser = await User.create({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-    role: req.body.role,
-  });
+const getAndSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+  console.log(token);
 
-  const token = signToken(newUser.id);
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIES_EXPIRES * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
 
-  return res.status(201).json({
-    status: "sucess",
+  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+
+  res.cookie("jwt", token, cookieOptions);
+
+  user.password = undefined;
+
+  res.status(statusCode).json({
+    status: "success",
+    user,
     token,
-    data: {
-      user: newUser,
-    },
   });
+};
+
+exports.signup = catchAsync(async (req, res, next) => {
+  const { name, email, password, role } = req.body;
+
+  if (!role || !["applicant", "recruiter"].includes(role)) {
+    return next(
+      new AppError(
+        "Role is required and must be either applicant or recruiter",
+        400
+      )
+    );
+  }
+
+  const newUser = await User.create({
+    name,
+    email,
+    password,
+    role,
+  });
+
+  getAndSendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -40,10 +67,16 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Password or email not correct", 401));
   }
 
-  const token = signToken(user.id);
-
-  return res.status(200).json({
-    status: "sucess",
-    token,
-  });
+  getAndSendToken(user, 201, res);
 });
+
+exports.logout = (req, res) => {
+  res.cookie("jwt", "loggedout", {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
+    status: "success",
+  });
+};

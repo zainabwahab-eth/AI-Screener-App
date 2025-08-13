@@ -5,19 +5,21 @@ const authMiddleware = require("./../middleware/authMiddleware");
 
 const router = express.Router();
 
+// router.post("/user/role", userController.selectRole);
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);
+router.get("/logout", authController.logout);
 
 router.use(authMiddleware.validateUser);
 
-router.post(
+router.patch(
   "/recruiter/onboard",
   authMiddleware.restrictTo("recruiter"),
   userController.uploadLogo,
   userController.onboardRecruiter
 );
 
-router.post(
+router.patch(
   "/applicant/onboard",
   authMiddleware.restrictTo("applicant"),
   userController.uploadProfilePics,

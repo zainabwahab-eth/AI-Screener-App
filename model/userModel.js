@@ -22,7 +22,11 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       enum: ["recruiter", "applicant"],
-      default: "applicant",
+      require: true,
+    },
+    hasCompletedOnboarding: {
+      type: Boolean,
+      default: false,
     },
     company: {
       name: String,
@@ -33,23 +37,15 @@ const userSchema = new mongoose.Schema(
         cloudinary_id: String,
         url: String,
       },
-      hasCompletedOnboarding: {
-        type: Boolean,
-        default: false,
-      },
     },
     applicant: {
       bio: String,
-      interest: [String],
+      interests: [String],
       website: String,
       profilePics: {
         picsname: String,
         cloudinary_id: String,
         url: String,
-      },
-      hasCompletedOnboarding: {
-        type: Boolean,
-        default: false,
       },
     },
     favoriteJobs: [

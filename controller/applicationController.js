@@ -1,111 +1,94 @@
-const axios = require("axios");
-const pdfparse = require("pdf-parse");
-const mammoth = require("mammoth");
-const cloudinary = require("./../config/cloudinary");
+const {
+  cloudinary,
+  uploadToCloudinary,
+  cleanupCloudinaryFile,
+} = require("./../config/cloudinary");
 const Application = require("./../model/applicationModel");
 const resumeUpload = require("./../utils/resumeUpload");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
-
-const getExtractedText = async (file) => {
-  let extractedText = "";
-
-  try {
-    if (file.mimetype === "application/pdf") {
-      const response = await axios({
-        method: "GET",
-        url: file.path,
-        responseType: "arraybuffer",
-      });
-      const data = await pdfparse(Buffer.from(response.data));
-      extractedText = data.text;
-    } else if (
-      file.mimetype ===
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    ) {
-      const response = await axios({
-        method: "GET",
-        url: file.path,
-        responseType: "arraybuffer",
-      });
-      const result = await mammoth.extractRawText({
-        buffer: Buffer.from(response.data),
-      });
-      extractedText = result.value;
-    } else {
-      throw new Error(`Unsupported file type: ${file.mimetype}`);
-    }
-
-    return extractedText;
-  } catch (error) {
-    throw new Error(`Failed to extract text from file: ${error.message}`);
-  }
-};
+const getExtractedText = require(".././utils/extractText");
 
 exports.uploadResume = resumeUpload.single("resume");
 
-exports.createApplication = catchAsync(async (req, res, next) => {
-  const { jobId } = req.params;
-  const applicantId = req.user.id;
-
+checkExistingApplication = async (jobId, applicantId, next) => {
   const existingApplication = await Application.findOne({
     jobId,
     applicantId,
   });
+
   if (existingApplication) {
     return next(new AppError("You already applied to this job", 400));
   }
+};
 
-  const file = req.file;
+validateFileUpload = (file, next) => {
   if (!file) {
-    return next(new AppError("You have to upload your resume", 400));
+    throw next(new AppError("You have to upload your resume", 400));
   }
+};
 
-  const extractedText = await getExtractedText(file);
-
-  if (!extractedText || extractedText.trim().length === 0) {
-    try {
-      await cloudinary.uploader.destroy(file.filename, {
-        resource_type: "raw",
-      });
-    } catch (cleanupError) {
-      console.error(
-        "Failed to cleanup file after text extraction failure:",
-        cleanupError
+extractResumeText = async (file, next) => {
+  try {
+    const text = await getExtractedText(file);
+    if (!text || text.trim().length < 10) {
+      throw next(
+        new AppError(
+          "The uploaded resume appears to be empty or contains insufficient text. Please upload a resume with readable content.",
+          400
+        )
       );
     }
-
-    return next(
-      new AppError(
-        "Could not extract text from the resume. Please ensure the file is readable and not corrupted.",
-        400
-      )
-    );
+    return text;
+  } catch (err) {
+    const message = err.message.includes("Failed to extract text")
+      ? err.message
+      : `Unable to process your resume: ${err.message}`;
+    throw next(new AppError(message, 400));
   }
+};
 
-  const newApplication = await Application.create({
-    jobId,
-    applicantId,
-    resume: {
-      filename: file.originalname,
-      url: file.path, // This will be the Cloudinary URL
-      mimetype: file.mimetype,
-      size: file.size,
-      cloudinary_id: file.filename, // Cloudinary public ID
-    },
-    extractedText,
-  });
+exports.createApplication = catchAsync(async (req, res, next) => {
+  const { jobId } = req.params;
+  const applicantId = req.user.id;
+  const file = req.file;
 
-  const job = req.job;
-  job.noOfApplications++;
-  await job.save();
+  try {
+    await checkExistingApplication(jobId, applicantId);
+    validateFileUpload(file);
 
-  res.status(201).json({
-    status: "success",
-    data: {
-      application: newApplication,
-    },
-  });
+    const extractedText = await extractResumeText(file);
+    const cloudinaryResult = await uploadToCloudinary(file);
+
+    const newApplication = await Application.create({
+      jobId,
+      applicantId,
+      resume: {
+        filename: file.originalname,
+        url: cloudinaryResult.secure_url,
+        mimetype: file.mimetype,
+        size: file.size,
+        cloudinary_id: cloudinaryResult.public_id,
+      },
+      extractedText,
+    });
+
+    req.job.noOfApplications++;
+    await req.job.save();
+
+    res.status(201).json({
+      status: "success",
+      data: { application: newApplication },
+    });
+  } catch (error) {
+    if (error instanceof AppError) return next(error);
+
+    // Clean up if something failed after upload
+    if (error && error.public_id) {
+      await cleanupCloudinaryFile(error.public_id);
+    }
+    next(error);
+  }
 });
 
 exports.getAllApplications = catchAsync(async (req, res, next) => {
@@ -126,7 +109,7 @@ exports.getAllApplications = catchAsync(async (req, res, next) => {
 
 exports.getMyApplications = catchAsync(async (req, res, next) => {
   const applications = await Application.find({ applicantId: req.user.id })
-    .populate("jobId", "title company")
+    .populate("jobId", "title company location jobStatus")
     .sort({ createdAt: -1 });
 
   return res.status(200).json({

@@ -12,11 +12,11 @@ const applicationSchema = mongoose.Schema({
     required: true,
   },
   resume: {
-    filename: String,
-    url: String,
-    mimeType: String,
-    size: String,
-    cloudinary_id: String,
+    filename: { type: String, required: true },
+    url: { type: String, required: true },
+    mimetype: { type: String, required: true },
+    size: { type: Number, required: true },
+    cloudinary_id: { type: String, required: true },
   },
   submittedAt: {
     type: Date,

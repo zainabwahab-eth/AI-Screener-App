@@ -1,5 +1,3 @@
-const qs = require("qs");
-
 class JobSearch {
   constructor(query, queryString) {
     this.query = query;
@@ -7,11 +5,14 @@ class JobSearch {
   }
 
   filter() {
+    // Create a copy of the queryString
     const queryObj = { ...this.queryString };
+
+    // Remove excluded fields
     const excludeFields = ["page", "sort", "limit", "fields", "keyword"];
     excludeFields.forEach((el) => delete queryObj[el]);
 
-    // Transform query object to handle nested operators (e.g., minSalary[lt])
+    // Transform query object to handle nested operators and arrays
     const transformedQuery = {};
     for (const [key, value] of Object.entries(queryObj)) {
       // Check if the key contains an operator (e.g., minSalary[lt])
@@ -23,13 +24,22 @@ class JobSearch {
 
         // Ensure the field exists in transformedQuery
         transformedQuery[field] = transformedQuery[field] || {};
-        // Add the operator and value (convert to number if needed)
-        transformedQuery[field][mongoOperator] = isNaN(value)
-          ? value
-          : Number(value);
+        // Handle array values for $in/$nin operators
+        if (["in", "nin"].includes(operator) && typeof value === "string") {
+          transformedQuery[field][mongoOperator] = value.split(",");
+        } else {
+          // Convert to number if applicable
+          transformedQuery[field][mongoOperator] = isNaN(value)
+            ? value
+            : Number(value);
+        }
       } else {
-        // Handle non-operator fields directly
-        transformedQuery[key] = isNaN(value) ? value : Number(value);
+        // Handle direct fields, supporting arrays for multi-select
+        if (Array.isArray(value)) {
+          transformedQuery[key] = { $in: value };
+        } else {
+          transformedQuery[key] = isNaN(value) ? value : Number(value);
+        }
       }
     }
 
@@ -37,44 +47,14 @@ class JobSearch {
     this.query = this.query.find(transformedQuery);
     console.log("Transformed Query:", JSON.stringify(transformedQuery));
     return this;
-
-    // // Convert query string operators to MongoDB operators
-    // let queryStr = JSON.stringify(queryObj);
-
-    // // Fix the regex replacement to properly handle nested operators
-    // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-
-    // // Parse the modified query string
-    // const parsedQuery = JSON.parse(queryStr);
-
-    // // Handle special cases where operators might be nested in object keys
-    // const mongoQuery = {};
-    // for (const key in parsedQuery) {
-    //   if (key.includes("[") && key.includes("]")) {
-    //     // Handle bracket notation (minSalary[lt])
-    //     const field = key.split("[")[0];
-    //     const operator = key.split("[")[1].replace("]", "");
-    //     mongoQuery[field] = { [`${operator}`]: parsedQuery[key] };
-    //   } else {
-    //     mongoQuery[key] = parsedQuery[key];
-    //   }
-    // }
-
-    // this.query = this.query.find(mongoQuery);
-    // console.log("Final MongoDB Query:", mongoQuery);
-    // return this;
   }
-
-  //{"price":{"$lt":"1000"}}
 
   searchByKeyword(fields = ["title", "description", "tags"]) {
     if (this.queryString.keyword) {
       const keyword = this.queryString.keyword;
-
       const orConditions = fields.map((field) => ({
         [field]: { $regex: keyword, $options: "i" },
       }));
-
       this.query = this.query.find({ $or: orConditions });
     }
     return this;

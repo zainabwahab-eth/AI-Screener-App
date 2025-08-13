@@ -12,28 +12,40 @@ exports.getAllJobs = catchAsync(async (req, res, next) => {
     .limitFields()
     .paginate();
 
+  // const jobs = await search.query.explain("executionStats");
   const jobs = await search.query;
 
   return res.status(200).json({
     status: "success",
     result: jobs.length,
     data: {
-      job: jobs,
+      jobs,
     },
   });
 });
 
 exports.getMyFavoriteJobs = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.user.id).populate({
-    path: "favoriteJobs",
-    select: "title company title description",
-  });
+  const user = await User.findById(req.user.id).select("favoriteJobs");
+
+  // Create a query restricted to only favorite jobs
+  const search = new JobSearch(
+    Job.find({ _id: { $in: user.favoriteJobs } }),
+    req.query
+  )
+    .filter()
+    .searchByKeyword()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const jobs = await search.query;
+  // const jobs = await search.query.explain("executionStats");
 
   res.status(200).json({
     status: "success",
-    results: user.favoriteJobs.length,
+    results: jobs.length,
     data: {
-      jobs: user.favoriteJobs,
+      jobs,
     },
   });
 });

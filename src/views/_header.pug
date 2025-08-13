@@ -1,0 +1,41 @@
+header.header
+    .header__container
+        if user
+            nav.header__nav(id='headerNav')
+                ul.header__nav-list
+                    li
+                        a.header__nav-link(href='/' class=page === 'jobs' ? 'active' : '') Jobs
+                    li
+                        a.header__nav-link(href='/favorites' class=page === 'favorites' ? 'active' : '') Favorites Jobs
+                    li
+                        a.header__nav-link(href='/applications' class=page === 'applications' ? 'active' : '') My Applications
+
+            a.header__logo(href='/') LOGO          
+                
+            .header__user
+                a.header__logout Logout
+                a.nav__el(href='/me')
+                - console.log(user.applicant.profilePics.url)
+                if user.applicant.profilePics.url 
+                    img.nav__user-img(src=`${user.applicant.profilePics.url}` alt=`Photo of ${user.name}`)
+                else 
+                    img.default-image(src='/img/profile/defaultuser.svg' alt=`Photo of user`)
+                span(class='header__username')= user.name.split(' ')[0]
+
+        else 
+            nav.header__nav(id='headerNav')
+                ul.header__nav-list
+                    li
+                        a.header__nav-link(href='/' class=page === 'jobs' ? 'active' : '') Jobs
+
+            a.header__logo(href='/user-onboard') LOGO          
+                
+            .header__user
+                a.header__login(href='/login') Log In
+                a.header__signup(href='/roles') SignUp
+    
+        
+        //- button.header__mobile-toggle(id='mobileToggle' aria-label='Toggle navigation')
+        //- span
+        //- span
+        //- span

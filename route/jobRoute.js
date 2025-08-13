@@ -8,7 +8,7 @@ const router = express.Router();
 router.route("/").get(jobController.getAllJobs);
 
 router.get(
-  "/myFavourite",
+  "/my-favorites",
   authMiddleware.validateUser,
   authMiddleware.restrictTo("applicant"),
   jobController.getMyFavoriteJobs
@@ -27,7 +27,7 @@ router.use(authMiddleware.validateUser);
 
 router
   .route("/favourite/:jobId")
-  .post(
+  .patch(
     authMiddleware.restrictTo("applicant"),
     authMiddleware.checkJob,
     jobController.toggleFavourite

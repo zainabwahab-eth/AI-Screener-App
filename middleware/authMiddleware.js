@@ -9,7 +9,9 @@ const Application = require("./../model/applicationModel");
 exports.validateUser = catchAsync(async (req, res, next) => {
   let token;
 
-  if (
+  if (req.cookies.jwt) {
+    token = req.cookies.jwt;
+  } else if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
@@ -18,7 +20,7 @@ exports.validateUser = catchAsync(async (req, res, next) => {
 
   if (!token) {
     return next(
-      new AppError("User not logged in. Please log in to continue", 400)
+      new AppError("User not logged in. Please log in to continue", 401)
     );
   }
 
@@ -38,6 +40,7 @@ exports.validateUser = catchAsync(async (req, res, next) => {
     );
   }
 
+  res.locals.user = currentUser;
   req.user = currentUser;
   next();
 });
@@ -103,3 +106,36 @@ exports.checkJob = catchAsync(async (req, res, next) => {
   req.job = job;
   next();
 });
+
+exports.isLoggedIn = async (req, res, next) => {
+  //   1. Check if the token is sent
+  if (req.cookies.jwt) {
+    try {
+      //2. Verify token
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+
+      //3. Check if the user still exist
+      const currentUser = await User.findById(decoded.id);
+      if (!currentUser) {
+        return next();
+      }
+
+      //4. Check if user changed password after token was issued
+      if (currentUser.changePasswordAfter(decoded.iat)) {
+        return next();
+      }
+
+      //There is a logged in user
+      //Give our pug template assess to user
+      // req.user = currentUser;
+      res.locals.user = currentUser;
+      return next();
+    } catch (err) {
+      return next();
+    }
+  }
+  next();
+};

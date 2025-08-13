@@ -1,0 +1,30 @@
+extends authbase
+
+block authcontent
+        .roles-container
+          h1.role-title Select your role
+          p.role-subtitle Join as a recruiter or an applicant
+          
+          .options-container
+            .option-card
+              input(type="radio" id="recruiter" name="user-role" value="recruiter")
+              label(for="recruiter")
+                .option-icon
+                  img(src='img/general/recruiter.svg' alt='recruiter icon')
+                .content
+                  h3 I'm a recruiter, looking to hire
+            
+            .option-card
+              input(type="radio" id="applicant" name="user-role" value="applicant")
+              label(for="applicant")
+                .option-icon
+                    img(src='img/general/applicant.svg' alt='applicant icon')
+                .content
+                  h3 I'm an applicant, looking for a job
+          
+          .action-section
+            button.btn.btn-primary.role-submit Create Account
+            
+            .login-section
+              span.login-text Already have an account? 
+                a(href="/login") Log In

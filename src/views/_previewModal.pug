@@ -1,0 +1,13 @@
+// src/client/views/partials/previewModal.pug
+.preview-modal.hidden
+  .preview-content
+    button.preview-close-btn &times;
+    h2 Resume Preview
+    .preview-container
+      if resume && resume.mimetype === 'application/pdf'
+        iframe#pdfViewer(data-url=`${resume.url}` width='100%' height='600px')
+      else if extractedText
+        pre#textPreview= extractedText
+      else
+        p No preview available
+  .preview-overlay.hidden

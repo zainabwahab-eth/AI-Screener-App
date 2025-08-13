@@ -51,4 +51,11 @@ router.get(
   applicationController.getApplicationById
 );
 
+// router.get(
+//   "/:applicationId/preview",
+//   authMiddleware.validateUser,
+//   authMiddleware.restrictTo("applicant", "recruiter"),
+//   applicationController.getResumePreview
+// );
+
 module.exports = router;

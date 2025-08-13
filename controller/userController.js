@@ -11,11 +11,11 @@ exports.onboardRecruiter = catchAsync(async (req, res, next) => {
   const recruiterId = req.user.id;
 
   const existingUser = await User.findById(recruiterId);
-  if (existingUser.company?.hasCompletedOnboarding) {
+  if (existingUser.hasCompletedOnboarding) {
     return next(new AppError("You have already completed onboarding", 400));
   }
 
-  if (!req.body && !req.file) {
+  if (Object.keys(req.body).length === 0 && !req.file) {
     return next(
       new AppError(
         "Please fill at least one field before completing onboarding",
@@ -26,15 +26,13 @@ exports.onboardRecruiter = catchAsync(async (req, res, next) => {
 
   const { companyName, industry, website } = req.body;
   const logo = req.file;
-  console.log(logo);
 
   const updateData = {
-    company: {
-      hasCompletedOnboarding: true,
-    },
+    hasCompletedOnboarding: true,
+    applicant: {},
   };
 
-  if (companyName) updateData.company.name = companyName;
+  if (companyName) updateData.applicant.name = companyName;
   if (industry) updateData.company.industry = industry;
   if (website) updateData.company.website = website;
 
@@ -60,14 +58,15 @@ exports.onboardRecruiter = catchAsync(async (req, res, next) => {
 });
 
 exports.onboardApplicant = catchAsync(async (req, res, next) => {
+  console.log("im here onboard");
   const applicantId = req.user.id;
 
   const existingUser = await User.findById(applicantId);
-  if (existingUser.applicant?.hasCompletedOnboarding) {
+  if (existingUser.hasCompletedOnboarding) {
     return next(new AppError("You have already completed onboarding", 400));
   }
 
-  if (!req.body && !req.file) {
+  if (Object.keys(req.body).length === 0 && !req.file) {
     return next(
       new AppError(
         "Please fill at least one field before completing onboarding",
@@ -76,18 +75,17 @@ exports.onboardApplicant = catchAsync(async (req, res, next) => {
     );
   }
 
-  const { bio, interest, website } = req.body;
+  const { bio, interests, website } = req.body;
   const profilePics = req.file;
   console.log(profilePics);
 
   const updateData = {
-    applicant: {
-      hasCompletedOnboarding: true,
-    },
+    hasCompletedOnboarding: true,
+    applicant: {},
   };
 
   if (bio) updateData.applicant.bio = bio;
-  if (interest) updateData.applicant.interest = interest;
+  if (interests) updateData.applicant.interests = JSON.parse(interests);
   if (website) updateData.applicant.website = website;
 
   if (profilePics) {

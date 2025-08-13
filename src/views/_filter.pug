@@ -1,0 +1,60 @@
+form.filter-sidebar(id='filterSidebar')
+  .filter-sidebar__header
+    h2.filter-sidebar__title Filter
+    button.btn.btn-secondary(type='button' class='filter-sidebar__submit') Apply Filters
+    button.btn.filter-sidebar__refresh(type='button') Refresh
+
+
+
+  .filter-section
+    h3.filter-section__title Keyword Search
+    .filter-option
+      input.search-input(type='text' id='keyword' name='keyword' placeholder='Enter job title, description, or tags')
+  
+  .filter-section
+    h3.filter-section__title Experience
+    .filter-option
+      input(class='experience' type='checkbox' id='entry-level' name='experience' value='entry-level')
+      label(for='entry-level') Entry-level
+    .filter-option
+      input(class='experience' type='checkbox' id='beginner' name='experience' value='beginner')
+      label(for='beginner') Beginner
+    .filter-option
+      input(class='experience' type='checkbox' id='mid-level' name='experience' value='mid-level')
+      label(for='mid-level') Mid-level
+    .filter-option
+      input(class='experience' type='checkbox' id='senior' name='experience' value='senior')
+      label(for='senior') Senior
+    .filter-option
+      input(class='experience' type='checkbox' id='associate' name='experience' value='associate')
+      label(for='associate') Associate
+
+  .filter-section
+    h3.filter-section__title Location Type
+    .filter-option
+      input(type='checkbox' id='remote' name='locationType' value='remote')
+      label(for='remote') Remote
+    .filter-option
+      input(type='checkbox' id='on-site' name='locationType' value='on-site')
+      label(for='on-site') On-site
+    .filter-option
+      input(type='checkbox' id='hybrid' name='locationType' value='hybrid')
+      label(for='hybrid') Hybrid
+
+  .filter-section
+    h3.filter-section__title Salary Range
+    .filter-option
+      input(type='radio' id='under-1000' name='salary' value='under-1000')
+      label(for='under-1000') Under $1,000
+    .filter-option
+      input(type='radio' id='1000-10000' name='salary' value='1000-10000')
+      label(for='1000-10000') $1,000 - $10,000
+    .filter-option
+      input(type='radio' id='10000-50000' name='salary' value='10000-50000')
+      label(for='10000-50000') $10,000 - $50,000
+    .filter-option
+      input(type='radio' id='above-50000' name='salary' value='above-50000')
+      label(for='above-50000') Above $50,000
+
+    //- .filter-section
+    //-   button(type='submit' class='filter-sidebar__submit') Apply Filters

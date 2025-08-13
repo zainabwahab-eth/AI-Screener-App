@@ -32,7 +32,7 @@ const jobSchema = new mongoose.Schema(
     },
     jobStatus: {
       type: String,
-      enum: ["active", "inactive"],
+      enum: ["active", "inactive", "expired"],
       default: "active",
     },
     minSalary: {
@@ -50,15 +50,24 @@ const jobSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    expiringDate: {
+      type: Date,
+    },
     tags: [String],
   },
   { timestamps: true }
 );
 
-jobSchema.pre(/^find/, function (next) {
-  this.find({ jobStatus: { $ne: "inactive" } });
-  next();
-});
+// jobSchema.pre(/^find/, function (next) {
+//   this.find({ jobStatus: { $ne: "inactive" } });
+//   next();
+// });
+
+jobSchema.index({ minSalary: 1});
+jobSchema.index({ maxSalary: -1 });
+jobSchema.index({ experience: 1 });
+jobSchema.index({ locationType: 1 });
+jobSchema.index({ title: 'text', description: 'text', tags: 'text' });
 
 jobSchema.pre(/^find/, function (next) {
   this.populate({

@@ -1,0 +1,60 @@
+extends authbase
+
+block authcontent
+    .auth-container
+        if authType === 'signup'
+            h1.auth-title Create Account
+            p.auth-subtitle Already have account? 
+                a(href='/login') Log In
+            
+            button.google-signin(type='button')
+                span 🔍
+                | Sign up with Google
+            
+            .auth-divider Or
+            
+            form.signup-form.auth-form()
+                .form-group
+                    label.form-label(for='name') Full Name
+                    input.form-input(type='text' id='name' name='name' placeholder='Enter your Full name' required)
+                
+                .form-group
+                    label.form-label(for='email') Email Address
+                    input.form-input(type='email' id='email' name='email' placeholder='Enter your email address' required)
+                
+                .form-group
+                    label.form-label(for='password') Password
+                    .password-input
+                        input.form-input(type='password' id='password' name='password' placeholder='Enter Password' required minlength='8')
+                        button.password-toggle(type='button' aria-label='Toggle password visibility') 👁
+                
+                button.btn.btn-primary.auth-submit(type='submit') Signup
+        
+        else
+            h1.auth-title Log In
+            p.auth-subtitle Don't have account? 
+                a(href='/roles') Create Account
+            
+            button.google-signin(type='button')
+                img.google-icon(src='/img/general/google-icon.svg')
+                span
+                | Sign in with Google
+            
+            .auth-divider Or
+            
+            form.login-form.auth-form()
+                .form-group
+                    label.form-label(for='email') Email Address
+                    input.form-input(type='email' id='email' name='email' placeholder='Enter your email address' required)
+                
+                .form-group
+                    label.form-label(for='password') Password
+                    .password-input
+                        input.form-input(type='password' id='password' name='password' placeholder='Enter Password'
+                            required minlength='8')
+                        button.password-toggle(type='button' aria-label='Toggle password visibility') 👁
+                
+                button.btn.btn-primary.auth-submit(type='submit') Log In
+                
+                .auth-links
+                a.btn-link(href='/forgot-password') Forgot Password?
