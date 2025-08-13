@@ -29,7 +29,7 @@
 70C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pug-linker133984816003341534 1
 104C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\@redis\client\dist\lib\commands\ZLEXCOUNT.js133982388666151518 0
 65C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\pause133984816002007616 1
-57C:\Users\USER\OneDrive\Desktop\AI-Screener-app\.gitignore133995799019380044 0
+57C:\Users\USER\OneDrive\Desktop\AI-Screener-app\.gitignore133995804928258637 0
 91C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\caniuse-lite\data\regions\DO.js133985759048330204 0
 86C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\validator\lib\isIPRange.js133975208588855164 0
 99C:\Users\USER\OneDrive\Desktop\AI-Screener-app\node_modules\node-cron\dist\esm\task-registry.js.map133982367009536655 0
